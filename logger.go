@@ -33,6 +33,10 @@ func ipAddress() (string, error) {
 func New(logglyToken, logglyHost, logglyTag string, logLevel string) (logrus.FieldLogger, error) {
 	// Setup logging
 	logr := logrus.New()
+	if len(logLevel) == 0 {
+		logLevel = logrus.InfoLevel.String()
+	}
+
 	level, err := logrus.ParseLevel(logLevel)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to parse logLevel")
